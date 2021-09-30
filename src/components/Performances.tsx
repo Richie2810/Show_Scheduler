@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Card, Col } from "react-bootstrap";
 
 export interface PerformancesProps {
@@ -8,17 +9,16 @@ export interface PerformancesProps {
   status: String;
   key: Number;
   id: String;
-  onSchduleClick: Function;
 }
 
 export default function Performances(props: PerformancesProps) {
-  const onScheduleClick = (id) => {
-    props.onSchduleClick(id);
-  };
+  const [status, setStatus] = useState("green");
+
+  const onScheduleClick = (id) => {};
 
   return (
     <Col>
-      <Card className="mb-3">
+      <Card className="mb-3" style={{ backgroundColor: `${status}` }}>
         <Card.Title className="text-center">{props.title}</Card.Title>
         <Card.Text>{props.description}</Card.Text>
         <Card.Text>Start: {props.start_date}</Card.Text>
