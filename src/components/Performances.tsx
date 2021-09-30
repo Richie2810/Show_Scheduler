@@ -1,4 +1,4 @@
-import { Card, Col, Dropdown, DropdownButton } from "react-bootstrap";
+import { Card, Col } from "react-bootstrap";
 
 export interface PerformancesProps {
   title: String;
@@ -7,10 +7,15 @@ export interface PerformancesProps {
   description: String;
   status: String;
   key: Number;
+  id: String;
+  onSchduleClick: Function;
 }
 
 export default function Performances(props: PerformancesProps) {
-  console.log(props);
+  const onScheduleClick = (id) => {
+    props.onSchduleClick(id);
+  };
+
   return (
     <Col>
       <Card className="mb-3">
@@ -18,9 +23,14 @@ export default function Performances(props: PerformancesProps) {
         <Card.Text>{props.description}</Card.Text>
         <Card.Text>Start: {props.start_date}</Card.Text>
         <Card.Text>End: {props.end_date}</Card.Text>
-        <DropdownButton id="dropdown-item-button" title="Add to Schedule">
-          <Dropdown.Item as="button" />
-        </DropdownButton>
+        <button
+          type="button"
+          onClick={() => {
+            onScheduleClick(props.id);
+          }}
+        >
+          Add to schedule
+        </button>
       </Card>
     </Col>
   );
