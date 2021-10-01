@@ -7,10 +7,11 @@ import { PerformancesProps } from "./Performances";
 export default function Schedule(props: PerformancesProps) {
   const user = useSelector(selectUser);
   const dispatch = useDispatch();
-  const currentStatus = "lightgreen";
+
+  const color = props.status ? "orange" : "lightgreen";
   return (
     <Col>
-      <Card className="mb-3" style={{ backgroundColor: `${currentStatus}` }}>
+      <Card className="mb-3" style={{ backgroundColor: `${color}` }}>
         <Card.Title className="text-center">{props.title}</Card.Title>
         <Card.Text>{props.description}</Card.Text>
         <Card.Text>Start: {props.start_date}</Card.Text>

@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { setInterval } from "timers";
 import Performances from "../components/Performances";
 import Schedule from "../components/Schedule";
 import { getPerformances } from "../store/performance/actions";
@@ -17,8 +18,23 @@ export default function Shows() {
   useEffect(() => {
     dispatch(getPerformances());
     dispatch(getSchedule(user.name));
+    const interval = setInterval(() => {
+      dispatch(getSchedule(user.name));
+    }, 60000);
+    return () => clearInterval(interval);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dispatch, user]);
 
+  const checkForAlerts = (schedule) => {
+    const shouldAlert = schedule.map((sch) => {
+      return {
+        ...sch,
+        status: new Date(sch.start_date).getTime() < new Date().getTime(),
+      };
+    });
+    return shouldAlert;
+  };
+  const alerts = checkForAlerts(userSchedule);
   return (
     <div>
       {allPerf
@@ -36,8 +52,8 @@ export default function Shows() {
             );
           })
         : null}
-      {userSchedule
-        ? userSchedule.map((perf, key) => {
+      {alerts
+        ? alerts.map((perf, key) => {
             return (
               <Schedule
                 key={key}
