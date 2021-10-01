@@ -1,8 +1,13 @@
 import { Card, Col } from "react-bootstrap";
+import { useDispatch, useSelector } from "react-redux";
+import { removeSchedule } from "../store/user/actions";
+import { selectUser } from "../store/user/selector";
 import { PerformancesProps } from "./Performances";
 
 export default function Schedule(props: PerformancesProps) {
-  const currentStatus = "orange";
+  const user = useSelector(selectUser);
+  const dispatch = useDispatch();
+  const currentStatus = "lightgreen";
   return (
     <Col>
       <Card className="mb-3" style={{ backgroundColor: `${currentStatus}` }}>
@@ -13,10 +18,10 @@ export default function Schedule(props: PerformancesProps) {
         <button
           type="button"
           onClick={() => {
-            // onRemoveClick(props.id);
+            dispatch(removeSchedule(user.name, props.id));
           }}
         >
-          Add to schedule
+          Remove
         </button>
       </Card>
     </Col>

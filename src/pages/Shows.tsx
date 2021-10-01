@@ -19,8 +19,6 @@ export default function Shows() {
     dispatch(getSchedule(user.name));
   }, [dispatch, user]);
 
-  //   console.log(allPerf);
-
   return (
     <div>
       {allPerf
@@ -32,20 +30,22 @@ export default function Shows() {
                 title={perf.title}
                 start_date={perf.start_date}
                 end_date={perf.end_date}
+                status={perf.status}
                 description={perf.description}
               />
             );
           })
         : null}
       {userSchedule
-        ? userSchedule.map((perf) => {
+        ? userSchedule.map((perf, key) => {
             return (
               <Schedule
-                key={perf._id}
+                key={key}
                 id={perf._id}
                 title={perf.title}
                 start_date={perf.start_date}
                 end_date={perf.end_date}
+                status={perf.status}
                 description={perf.description}
               />
             );

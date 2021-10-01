@@ -43,3 +43,20 @@ export const addToSchedule =
       console.log(e.messsage);
     }
   };
+
+export const removeSchedule =
+  (name, performance) => async (dispatch, getState) => {
+    try {
+      const response = await axios.patch(
+        `${apiUrl}/removeSchedule`,
+        {
+          name,
+          performance,
+        },
+        {}
+      );
+      dispatch(userFetched(response.data));
+    } catch (e) {
+      console.log(e.messsage);
+    }
+  };

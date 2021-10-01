@@ -15,7 +15,11 @@ export default function Login() {
 
   function Login() {
     dispatch(signIn(name));
-    history.push("/shows");
+    if (name === "ADMIN") {
+      history.push("/admin");
+    } else {
+      history.push("/shows");
+    }
   }
 
   return (

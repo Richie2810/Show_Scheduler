@@ -9,6 +9,7 @@ export interface PerformancesProps {
   start_date: Date;
   end_date: Date;
   description: String;
+  status: String;
   key: Number;
   id: String;
 }
@@ -20,7 +21,7 @@ export default function Performances(props: PerformancesProps) {
   const onScheduleClick = (id) => {
     dispatch(addToSchedule(user.name, props.id));
   };
-  let currentStatus = "green";
+  let currentStatus = "skyblue";
 
   return (
     <Col>
