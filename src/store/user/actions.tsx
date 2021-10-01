@@ -1,7 +1,7 @@
 import axios from "axios";
 import { apiUrl } from "../../config/constants";
 
-const loginSuccess = (user) => {
+const userFetched = (user) => {
   return {
     type: "user/fetched",
     payload: user,
@@ -20,9 +20,26 @@ export const signIn = (name: String) => {
         },
         {}
       );
-      dispatch(loginSuccess(response.data));
+      dispatch(userFetched(response.data));
     } catch (e) {
       console.log(e.message);
     }
   };
 };
+
+export const addToSchedule =
+  (name, performance) => async (dispatch, getstate) => {
+    try {
+      const response = await axios.patch(
+        `${apiUrl}/addToSchedule`,
+        {
+          name,
+          performance,
+        },
+        {}
+      );
+      dispatch(userFetched(response.data));
+    } catch (e) {
+      console.log(e.messsage);
+    }
+  };

@@ -1,17 +1,19 @@
 import React, { useState } from "react";
 import { Button, Col, Container, Form } from "react-bootstrap";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { signIn } from "../store/user/actions";
-import { selectUser } from "../store/user/selector";
 import { useHistory } from "react-router-dom";
 
 export default function Login() {
   const [name, set_name] = useState("");
   const dispatch = useDispatch();
-  const user = useSelector(selectUser);
   const history = useHistory();
 
-  function submitName(e) {
+  function CreateName(e) {
+    dispatch(signIn(name));
+  }
+
+  function Login() {
     dispatch(signIn(name));
     history.push("/shows");
   }
@@ -31,11 +33,14 @@ export default function Login() {
           />
         </Form.Group>
         <Form.Group className="mt-5">
-          <Button variant="primary" type="submit" onClick={submitName}>
+          <Button variant="primary" type="submit" onClick={Login}>
             Log in
           </Button>
         </Form.Group>
       </Form>
+      <Button variant="primary" type="submit" onClick={CreateName}>
+        Sign up
+      </Button>
     </Container>
   );
 }
