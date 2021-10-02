@@ -10,17 +10,16 @@ export interface PerformancesProps {
   start_date: Date;
   end_date: Date;
   description: String;
-  status: String;
+  status: Boolean;
   key: Number;
-  id: String;
 }
 
 export default function Performances(props: PerformancesProps) {
   const user = useSelector(selectUser);
   const dispatch = useDispatch();
 
-  const onScheduleClick = (id) => {
-    dispatch(addToSchedule(user.name, props.id));
+  const onScheduleClick = () => {
+    dispatch(addToSchedule(user.name, props.key));
   };
   let currentStatus = "skyblue";
   const start = new Date(props.start_date);
@@ -52,7 +51,7 @@ export default function Performances(props: PerformancesProps) {
         <button
           type="button"
           onClick={() => {
-            onScheduleClick(props.id);
+            onScheduleClick();
           }}
         >
           Add to schedule

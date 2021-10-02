@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { Key, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { setInterval } from "timers";
@@ -10,6 +10,17 @@ import { getSchedule } from "../store/schedule/actions";
 import { selectSchedule } from "../store/schedule/selector";
 import { selectUser } from "../store/user/selector";
 import "./Shows.css";
+
+interface PerfProps {
+  _id: (Key | null | undefined) & Number;
+  key: String;
+  id: Number;
+  title: String;
+  start_date: Date;
+  end_date: Date;
+  status: Boolean;
+  description: String;
+}
 
 export default function Shows() {
   const dispatch = useDispatch();
@@ -30,8 +41,8 @@ export default function Shows() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dispatch, user]);
 
-  const checkForAlerts = (schedule) => {
-    const shouldAlert = schedule.map((sch) => {
+  const checkForAlerts = (schedule: any) => {
+    const shouldAlert = schedule.map((sch: PerfProps) => {
       return {
         ...sch,
         status:
@@ -65,11 +76,10 @@ export default function Shows() {
         </div>
         <div className="cards">
           {allPerf
-            ? allPerf.map((perf) => {
+            ? allPerf.map((perf: PerfProps) => {
                 return (
                   <Performances
                     key={perf._id}
-                    id={perf._id}
                     title={perf.title}
                     start_date={perf.start_date}
                     end_date={perf.end_date}
@@ -91,11 +101,10 @@ export default function Shows() {
         </div>
         <div className="cards">
           {alerts ? (
-            alerts.map((perf, key) => {
+            alerts.map((perf: PerfProps) => {
               return (
                 <Schedule
-                  key={key}
-                  id={perf._id}
+                  key={perf._id}
                   title={perf.title}
                   start_date={perf.start_date}
                   end_date={perf.end_date}

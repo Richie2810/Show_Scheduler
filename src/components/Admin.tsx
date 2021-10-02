@@ -15,7 +15,7 @@ export default function Admin() {
 
   const dispatch = useDispatch();
 
-  function submitForm(event) {
+  function submitForm(event: React.ChangeEvent) {
     event.preventDefault();
 
     dispatch(addPerformance(title, description, start_date, end_date));
@@ -27,7 +27,7 @@ export default function Admin() {
     set_end_date("");
   }
 
-  function removePerf(e) {
+  function removePerf(e: React.ChangeEvent) {
     e.preventDefault();
     dispatch(removePerformance(remove_perf));
     set_remove_perf("");
@@ -87,7 +87,13 @@ export default function Admin() {
           />
         </Form.Group>
         <Form.Group className="mt-5">
-          <Button variant="primary" type="submit" onClick={submitForm}>
+          <Button
+            variant="primary"
+            type="submit"
+            onClick={(event: React.MouseEvent<HTMLElement>) => {
+              submitForm(event.target as any);
+            }}
+          >
             Add Performance
           </Button>
         </Form.Group>
@@ -103,7 +109,13 @@ export default function Admin() {
           />
         </Form.Group>
         <Form.Group className="mt-5">
-          <Button variant="primary" type="submit" onClick={removePerf}>
+          <Button
+            variant="primary"
+            type="submit"
+            onClick={(event: React.MouseEvent<HTMLElement>) => {
+              removePerf(event.target as any);
+            }}
+          >
             Remove Performance
           </Button>
         </Form.Group>

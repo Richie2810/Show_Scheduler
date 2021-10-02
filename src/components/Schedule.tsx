@@ -46,7 +46,7 @@ export default function Schedule(props: PerformancesProps) {
         <button
           type="button"
           onClick={() => {
-            dispatch(removeSchedule(user.name, props.id));
+            dispatch(removeSchedule(user.name, props.key));
           }}
         >
           Remove
