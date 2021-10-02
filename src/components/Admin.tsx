@@ -9,13 +9,13 @@ import {
 export default function Admin() {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
-  const [start_date, set_start_date] = useState(new Date());
-  const [end_date, set_end_date] = useState(new Date());
+  const [start_date, set_start_date] = useState("");
+  const [end_date, set_end_date] = useState("");
   const [remove_perf, set_remove_perf] = useState("");
 
   const dispatch = useDispatch();
 
-  function submitForm(event: React.ChangeEvent) {
+  function submitForm(event: { preventDefault: () => void }) {
     event.preventDefault();
 
     dispatch(addPerformance(title, description, start_date, end_date));
@@ -25,8 +25,8 @@ export default function Admin() {
     setDescription("");
   }
 
-  function removePerf(e: React.ChangeEvent) {
-    e.preventDefault();
+  function removePerf(event: { preventDefault: () => void }) {
+    event.preventDefault();
     dispatch(removePerformance(remove_perf));
     set_remove_perf("");
   }
@@ -66,8 +66,8 @@ export default function Admin() {
         <Form.Group controlId="formBasicLink">
           <Form.Label>Start Time</Form.Label>
           <Form.Control
-            value={new Date(start_date).getTime()}
-            onChange={(event) => set_start_date(new Date(event.target.value))}
+            value={start_date}
+            onChange={(event) => set_start_date(event.target.value)}
             type="text"
             placeholder="Start Time"
             required
@@ -77,8 +77,8 @@ export default function Admin() {
         <Form.Group controlId="formBasicImg">
           <Form.Label>End Time</Form.Label>
           <Form.Control
-            value={new Date(end_date).getTime()}
-            onChange={(event) => set_end_date(new Date(event.target.value))}
+            value={end_date}
+            onChange={(event) => set_end_date(event.target.value)}
             type="text"
             placeholder="End Time"
             required
@@ -89,7 +89,7 @@ export default function Admin() {
             variant="primary"
             type="submit"
             onClick={(event: React.MouseEvent<HTMLElement>) => {
-              submitForm(event.target as any);
+              submitForm(event);
             }}
           >
             Add Performance
@@ -111,7 +111,7 @@ export default function Admin() {
             variant="primary"
             type="submit"
             onClick={(event: React.MouseEvent<HTMLElement>) => {
-              removePerf(event.target as any);
+              removePerf(event);
             }}
           >
             Remove Performance

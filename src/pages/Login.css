@@ -1,0 +1,9 @@
+.Login {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.centered {
+  text-align: center;
+}

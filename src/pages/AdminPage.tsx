@@ -9,7 +9,7 @@ export default function AdminPage() {
     window.location.reload();
   };
   return (
-    <div>
+    <div className="Admin">
       <Admin />
       <button
         type="button"

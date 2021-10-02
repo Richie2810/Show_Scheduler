@@ -18,7 +18,7 @@ export const getPerformances =
   };
 
 export const addPerformance =
-  (title: String, description: String, start_date: Date, end_date: Date) =>
+  (title: String, description: String, start_date: String, end_date: String) =>
   async (dispatch: any, getState: PerformanceState) => {
     try {
       const response = await axios.post(`${apiUrl}/addPerformance`, {
