@@ -1,7 +1,9 @@
 import axios from "axios";
+import { ObjectId } from "mongoose";
 import { apiUrl } from "../../config/constants";
+import { UserAction, UserState } from "./types";
 
-const userFetched = (user) => {
+const userFetched = (user: String): UserAction => {
   return {
     type: "user/fetched",
     payload: user,
@@ -11,7 +13,7 @@ const userFetched = (user) => {
 export const logOut = () => ({ type: "user/logOut" });
 
 export const signIn = (name: String) => {
-  return async (dispatch: any, getState) => {
+  return async (dispatch: any, getState: UserState) => {
     try {
       const response = await axios.post(
         `${apiUrl}/newFan`,
@@ -21,14 +23,15 @@ export const signIn = (name: String) => {
         {}
       );
       dispatch(userFetched(response.data));
-    } catch (e) {
+    } catch (e: any) {
       console.log(e.message);
     }
   };
 };
 
 export const addToSchedule =
-  (name, performance) => async (dispatch, getstate) => {
+  (name: String, performance: ObjectId) =>
+  async (dispatch: any, getstate: UserState) => {
     try {
       const response = await axios.patch(
         `${apiUrl}/addToSchedule`,
@@ -39,13 +42,14 @@ export const addToSchedule =
         {}
       );
       dispatch(userFetched(response.data));
-    } catch (e) {
+    } catch (e: any) {
       console.log(e.messsage);
     }
   };
 
 export const removeSchedule =
-  (name, performance) => async (dispatch, getState) => {
+  (name: String, performance: ObjectId) =>
+  async (dispatch: any, getState: UserState) => {
     try {
       const response = await axios.patch(
         `${apiUrl}/removeSchedule`,
@@ -56,7 +60,7 @@ export const removeSchedule =
         {}
       );
       dispatch(userFetched(response.data));
-    } catch (e) {
+    } catch (e: any) {
       console.log(e.messsage);
     }
   };

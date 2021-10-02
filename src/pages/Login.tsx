@@ -9,7 +9,7 @@ export default function Login() {
   const dispatch = useDispatch();
   const history = useHistory();
 
-  function CreateName(e) {
+  function CreateName() {
     dispatch(signIn(name));
   }
 

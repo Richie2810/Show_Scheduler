@@ -4,6 +4,7 @@ import { selectUser } from "../store/user/selector";
 import { useDispatch, useSelector } from "react-redux";
 import { addToSchedule } from "../store/user/actions";
 import "./Performance.css";
+import { ObjectId } from "mongoose";
 
 export interface PerformancesProps {
   title: String;
@@ -12,6 +13,7 @@ export interface PerformancesProps {
   description: String;
   status: Boolean;
   key: Number;
+  id: ObjectId;
 }
 
 export default function Performances(props: PerformancesProps) {
@@ -19,7 +21,7 @@ export default function Performances(props: PerformancesProps) {
   const dispatch = useDispatch();
 
   const onScheduleClick = () => {
-    dispatch(addToSchedule(user.name, props.key));
+    dispatch(addToSchedule(user.name, props.id));
   };
   let currentStatus = "skyblue";
   const start = new Date(props.start_date);

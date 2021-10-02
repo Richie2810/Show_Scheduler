@@ -1,4 +1,5 @@
-import { Key, useEffect } from "react";
+import { ObjectId } from "mongoose";
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { setInterval } from "timers";
@@ -12,9 +13,9 @@ import { selectUser } from "../store/user/selector";
 import "./Shows.css";
 
 interface PerfProps {
-  _id: (Key | null | undefined) & Number;
-  key: String;
-  id: Number;
+  _id: ObjectId;
+  key: Number;
+  id: ObjectId;
   title: String;
   start_date: Date;
   end_date: Date;
@@ -76,10 +77,11 @@ export default function Shows() {
         </div>
         <div className="cards">
           {allPerf
-            ? allPerf.map((perf: PerfProps) => {
+            ? allPerf.map((perf: PerfProps, key: number) => {
                 return (
                   <Performances
-                    key={perf._id}
+                    key={key}
+                    id={perf._id}
                     title={perf.title}
                     start_date={perf.start_date}
                     end_date={perf.end_date}
@@ -101,10 +103,11 @@ export default function Shows() {
         </div>
         <div className="cards">
           {alerts ? (
-            alerts.map((perf: PerfProps) => {
+            alerts.map((perf: PerfProps, key: number) => {
               return (
                 <Schedule
-                  key={perf._id}
+                  key={key}
+                  id={perf._id}
                   title={perf.title}
                   start_date={perf.start_date}
                   end_date={perf.end_date}

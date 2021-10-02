@@ -1,10 +1,10 @@
 /* eslint-disable import/no-anonymous-default-export */
-
-const initialState = {
+import { ScheduleAction, ScheduleState } from "./types";
+const initialState: ScheduleState = {
   theSchedule: [],
 };
 
-export default (state = initialState, action) => {
+export default (state = initialState, action: ScheduleAction) => {
   switch (action.type) {
     case "schedule/fetched":
       return {

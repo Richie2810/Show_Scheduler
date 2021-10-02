@@ -8,3 +8,5 @@ export default combineReducers({
   performance,
   schedule,
 });
+
+export type ReduxState = ReturnType<typeof combineReducers>;

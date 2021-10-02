@@ -1,1 +1,1 @@
-export const selectSchedule = (state) => state.schedule.theSchedule;
+export const selectSchedule = (state: any) => state.schedule.theSchedule;

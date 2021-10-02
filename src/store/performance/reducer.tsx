@@ -1,10 +1,12 @@
 /* eslint-disable import/no-anonymous-default-export */
 
-const initialState = {
+import { PerformanceAction, PerformanceState } from "./types";
+
+const initialState: PerformanceState = {
   allPerformances: [],
 };
 
-export default (state = initialState, action) => {
+export default (state = initialState, action: PerformanceAction) => {
   switch (action.type) {
     case "performance/fetched":
       return {

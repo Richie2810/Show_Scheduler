@@ -1,22 +1,25 @@
 import axios from "axios";
 import { apiUrl } from "../../config/constants";
+import { PerformanceAction, PerformanceState } from "./types";
 
-const performancesFetched = (performances) => ({
+const performancesFetched = (performances: String) => ({
   type: "performance/fetched",
   payload: performances,
 });
 
-export const getPerformances = () => async (dispatch, getState) => {
-  try {
-    const response = await axios.get(`${apiUrl}/allPerformances`);
-    dispatch(performancesFetched(response.data));
-  } catch (e) {
-    console.log(e.messsage);
-  }
-};
+export const getPerformances =
+  () => async (dispatch: any, getState: PerformanceAction) => {
+    try {
+      const response = await axios.get(`${apiUrl}/allPerformances`);
+      dispatch(performancesFetched(response.data));
+    } catch (e: any) {
+      console.log(e.messsage);
+    }
+  };
 
 export const addPerformance =
-  (title, description, start_date, end_date) => async (dispatch, getState) => {
+  (title: String, description: String, start_date: Date, end_date: Date) =>
+  async (dispatch: any, getState: PerformanceState) => {
     try {
       const response = await axios.post(`${apiUrl}/addPerformance`, {
         title,
@@ -26,30 +29,32 @@ export const addPerformance =
       });
       // console.log(response.data);
       dispatch(performancesFetched(response.data));
-    } catch (e) {
+    } catch (e: any) {
       console.log(e.messsage);
     }
   };
 
 export const removePerformance =
-  (performance) => async (dispatch, getState) => {
+  (performance: String) =>
+  async (dispatch: any, getState: PerformanceState) => {
     try {
       const response = await axios.post(`${apiUrl}/removePerformance`, {
         performance,
       });
       // console.log(response.data);
       dispatch(performancesFetched(response.data));
-    } catch (e) {
+    } catch (e: any) {
       console.log(e.messsage);
     }
   };
 
-export const showsOver = () => async (dispatch, getState) => {
-  try {
-    const response = await axios.delete(`${apiUrl}/showsOver`);
-    // console.log(response.data);
-    dispatch(performancesFetched(response.data));
-  } catch (e) {
-    console.log(e.messsage);
-  }
-};
+export const showsOver =
+  () => async (dispatch: any, getState: PerformanceState) => {
+    try {
+      const response = await axios.delete(`${apiUrl}/showsOver`);
+      // console.log(response.data);
+      dispatch(performancesFetched(response.data));
+    } catch (e: any) {
+      console.log(e.messsage);
+    }
+  };

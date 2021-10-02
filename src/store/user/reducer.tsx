@@ -1,15 +1,13 @@
 /* eslint-disable import/no-anonymous-default-export */
-
-const initialState = {
+import { UserState, UserAction } from "./types";
+const initialState: UserState = {
   theUser: [],
 };
 
-export default (state = initialState, action) => {
+export default (state = initialState, action: UserAction) => {
   switch (action.type) {
     case "user/fetched":
       return { ...state, theUser: action.payload[0] };
-    case "user/logOut":
-      return { ...initialState, theUser: [] };
     default:
       return state;
   }
