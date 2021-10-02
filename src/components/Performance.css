@@ -1,0 +1,7 @@
+.performance {
+  display: flex;
+  width: 8rem;
+  flex-direction: row;
+  padding: 1rem;
+  text-align: center;
+}

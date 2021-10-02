@@ -24,7 +24,7 @@ export const addPerformance =
         start_date,
         end_date,
       });
-      console.log(response.data);
+      // console.log(response.data);
       dispatch(performancesFetched(response.data));
     } catch (e) {
       console.log(e.messsage);
@@ -37,9 +37,19 @@ export const removePerformance =
       const response = await axios.post(`${apiUrl}/removePerformance`, {
         performance,
       });
-      console.log(response.data);
+      // console.log(response.data);
       dispatch(performancesFetched(response.data));
     } catch (e) {
       console.log(e.messsage);
     }
   };
+
+export const showsOver = () => async (dispatch, getState) => {
+  try {
+    const response = await axios.delete(`${apiUrl}/showsOver`);
+    // console.log(response.data);
+    dispatch(performancesFetched(response.data));
+  } catch (e) {
+    console.log(e.messsage);
+  }
+};

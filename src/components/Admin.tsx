@@ -62,6 +62,9 @@ export default function Admin() {
             required
           />
         </Form.Group>
+        <Form.Label>
+          Please enter time in this format 2021-10-28T22:10:00.000+02:00
+        </Form.Label>
         <Form.Group controlId="formBasicLink">
           <Form.Label>Start Time</Form.Label>
           <Form.Control

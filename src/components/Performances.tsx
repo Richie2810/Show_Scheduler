@@ -3,6 +3,7 @@ import { Card, Col } from "react-bootstrap";
 import { selectUser } from "../store/user/selector";
 import { useDispatch, useSelector } from "react-redux";
 import { addToSchedule } from "../store/user/actions";
+import "./Performance.css";
 
 export interface PerformancesProps {
   title: String;
@@ -22,14 +23,32 @@ export default function Performances(props: PerformancesProps) {
     dispatch(addToSchedule(user.name, props.id));
   };
   let currentStatus = "skyblue";
+  const start = new Date(props.start_date);
+  const end = new Date(props.end_date);
+
+  const startHour = start.getHours();
+  const startMin = start.getMinutes();
+
+  const endHour = end.getHours();
+  const endMin = end.getMinutes();
+
+  const startString =
+    startMin.toString().slice().length === 1 ? "0" + startMin : startMin;
+
+  const endString =
+    endMin.toString().slice().length === 1 ? "0" + endMin : endMin;
 
   return (
-    <Col>
-      <Card className="mb-3" style={{ backgroundColor: `${currentStatus}` }}>
+    <Col className="performance">
+      <Card style={{ backgroundColor: `${currentStatus}` }}>
         <Card.Title className="text-center">{props.title}</Card.Title>
         <Card.Text>{props.description}</Card.Text>
-        <Card.Text>Start: {props.start_date}</Card.Text>
-        <Card.Text>End: {props.end_date}</Card.Text>
+        <Card.Text>
+          Start: {startHour}:{startString}
+        </Card.Text>
+        <Card.Text>
+          End: {endHour}:{endString}
+        </Card.Text>
         <button
           type="button"
           onClick={() => {
