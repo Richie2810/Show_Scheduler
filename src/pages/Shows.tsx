@@ -3,6 +3,7 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { setInterval } from "timers";
+import Loading from "../components/Loading";
 import Performances from "../components/Performances";
 import Schedule from "../components/Schedule";
 import { getPerformances, showsOver } from "../store/performance/actions";
@@ -60,26 +61,53 @@ export default function Shows() {
   };
   return (
     <>
-      <div className="Shows">
-        <div>
-          <h1>Hello {user.name}!</h1>
-          <button
-            type="button"
-            onClick={() => {
-              logOut();
-            }}
-          >
-            Log out
-          </button>
-        </div>
-        <div>
-          <h2>Performances!</h2>
-        </div>
-        <div className="cards">
-          {allPerf
-            ? allPerf.map((perf: PerfProps, key: number) => {
+      {user ? (
+        <div className="Shows">
+          <div>
+            <h1>Hello {user.name}!</h1>
+            <button
+              type="button"
+              onClick={() => {
+                logOut();
+              }}
+            >
+              Log out
+            </button>
+          </div>
+          <div>
+            <h2>Performances!</h2>
+          </div>
+          <div className="cards">
+            {allPerf
+              ? allPerf.map((perf: PerfProps, key: number) => {
+                  return (
+                    <Performances
+                      key={key}
+                      id={perf._id}
+                      title={perf.title}
+                      start_date={perf.start_date}
+                      end_date={perf.end_date}
+                      status={perf.status}
+                      description={perf.description}
+                    />
+                  );
+                })
+              : null}
+          </div>
+          <div>
+            <h2>Your Schedule!</h2>
+            <h5>
+              <i>
+                Shows will turn orange and notify you when there is 15 minutes
+                to show start
+              </i>
+            </h5>
+          </div>
+          <div className="cards">
+            {alerts ? (
+              alerts.map((perf: PerfProps, key: number) => {
                 return (
-                  <Performances
+                  <Schedule
                     key={key}
                     id={perf._id}
                     title={perf.title}
@@ -90,40 +118,17 @@ export default function Shows() {
                   />
                 );
               })
-            : null}
+            ) : (
+              <div>
+                Looks like you havnt added anything to your Schedule yet! Find a
+                perforance you like and press "add to schedule"
+              </div>
+            )}
+          </div>
         </div>
-        <div>
-          <h2>Your Schedule!</h2>
-          <h5>
-            <i>
-              Shows will turn orange and notify you when there is 15 minutes to
-              show start
-            </i>
-          </h5>
-        </div>
-        <div className="cards">
-          {alerts ? (
-            alerts.map((perf: PerfProps, key: number) => {
-              return (
-                <Schedule
-                  key={key}
-                  id={perf._id}
-                  title={perf.title}
-                  start_date={perf.start_date}
-                  end_date={perf.end_date}
-                  status={perf.status}
-                  description={perf.description}
-                />
-              );
-            })
-          ) : (
-            <div>
-              Looks like you havnt added anything to your Schedule yet! Find a
-              perforance you like and press "add to schedule"
-            </div>
-          )}
-        </div>
-      </div>
+      ) : (
+        <Loading />
+      )}
     </>
   );
 }

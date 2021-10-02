@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Button, Col, Container, Form } from "react-bootstrap";
+import { Button, Container, Form } from "react-bootstrap";
 import { useDispatch } from "react-redux";
 import { signIn } from "../store/user/actions";
 import { useHistory } from "react-router-dom";
@@ -11,11 +11,15 @@ export default function Login() {
   const history = useHistory();
 
   function Login() {
-    dispatch(signIn(name));
-    if (name === "ADMIN") {
-      history.push("/admin");
+    if (name === "") {
+      alert("Please enter in a name");
     } else {
-      history.push("/shows");
+      dispatch(signIn(name));
+      if (name === "ADMIN") {
+        history.push("/admin");
+      } else {
+        history.push("/shows");
+      }
     }
   }
 
