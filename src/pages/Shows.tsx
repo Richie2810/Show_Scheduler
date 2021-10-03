@@ -43,6 +43,10 @@ export default function Shows() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dispatch, user]);
 
+  //Here I am fetching the user schedule than mapping hrough it and adding a
+  //new key to the object "Status" which will return a boolean
+  //changing the dates to miliseconds and compareing them to see if they 15minutes away.
+  //I than Map this new object with "status" for my component
   const checkForAlerts = (schedule: any) => {
     const shouldAlert = schedule.map((sch: PerfProps) => {
       return {
@@ -53,7 +57,7 @@ export default function Shows() {
     });
     return shouldAlert;
   };
-  const alerts = checkForAlerts(userSchedule);
+  const scheduleWithStatus = checkForAlerts(userSchedule);
 
   const logOut = () => {
     history.push("/");
@@ -104,8 +108,8 @@ export default function Shows() {
             </h5>
           </div>
           <div className="cards">
-            {alerts ? (
-              alerts.map((perf: PerfProps, key: number) => {
+            {scheduleWithStatus ? (
+              scheduleWithStatus.map((perf: PerfProps, key: number) => {
                 return (
                   <Schedule
                     key={key}

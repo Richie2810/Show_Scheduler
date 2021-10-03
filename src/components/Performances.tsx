@@ -33,6 +33,7 @@ export default function Performances(props: PerformancesProps) {
   const endHour = end.getHours();
   const endMin = end.getMinutes();
 
+  //Having issue when I getMinutes the result is a single digit, for example 15:01 would be 15:1 so this adds the extra 0 to make 01
   const startString =
     startMin.toString().slice().length === 1 ? "0" + startMin : startMin;
 
